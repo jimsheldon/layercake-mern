@@ -10,11 +10,11 @@ import { BrowserRouter } from 'react-router-dom'
 import "./styles/reset.css";
 
 /* App is the entry point to the React code.*/
-import Routes from './Routes/index.jsx';
+import CRoutes from './Routes/index.jsx';
 
 ReactDOM.render(
 	<BrowserRouter basename="/">
-		<Routes />
+		<CRoutes />
 	</BrowserRouter>
 	,document.getElementById("root")
 );

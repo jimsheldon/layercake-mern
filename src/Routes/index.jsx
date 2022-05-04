@@ -19,9 +19,9 @@ const CRoutes = () => {
 			<Navbar />
 
 			<Routes>
-				<Route path='/' element={Home}/>
-				<Route path='/subpage' element={Subpage}/>
-				<Route element={ErrorPage}/> {/* This route is run when no matches are found - It's your 404 fallbback */}
+				<Route path='/' element={<Home/>}/>
+				<Route path='/subpage' element={<Subpage/>}/>
+				<Route element={<ErrorPage/>}/> {/* This route is run when no matches are found - It's your 404 fallbback */}
 			</Routes>
 
 			{/* <Link /> elements are in Navbar.jsx */}

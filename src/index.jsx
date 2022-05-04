@@ -3,7 +3,10 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+
+//import createRoot from 'react-dom/client';
 
 import { BrowserRouter } from 'react-router-dom'
 
@@ -12,9 +15,10 @@ import "./styles/reset.css";
 /* App is the entry point to the React code.*/
 import CRoutes from './Routes/index.jsx';
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
 	<BrowserRouter basename="/">
 		<CRoutes />
 	</BrowserRouter>
-	,document.getElementById("root")
 );

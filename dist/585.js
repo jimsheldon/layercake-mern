@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkMERN_Hello_World=self.webpackChunkMERN_Hello_World||[]).push([[585],{585:(e,l,t)=>{t.r(l),t.d(l,{default:()=>s});var a=t(294);const s=function(){return a.createElement("div",{className:"subpage"},a.createElement("h1",null,"Welcome to the subpage"))}}}]);

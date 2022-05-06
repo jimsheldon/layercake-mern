@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkMERN_Hello_World=self.webpackChunkMERN_Hello_World||[]).push([[615],{615:(e,l,t)=>{t.r(l),t.d(l,{default:()=>n});var a=t(294);const n=function(){return a.createElement("div",{className:"home"},a.createElement("h1",null,"Uh oh, that's a 404"),a.createElement("h1",null,"We weren't able to find that page for you"))}}}]);

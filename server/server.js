@@ -9,10 +9,11 @@ app.use(require('./routes/record'))
 // get driver connection
 const mcm = require('./db/mongoConnectionManager')
 
-app.listen(port, () => {
+const server = app.listen(port, async () => {
     // perform a database connection when server starts
-    mcm.connectToServer((err) => {
+    await mcm.connectToServer((err) => {
         if (err) console.error(err)
     })
     console.log(`Server is running on port: ${port}`)
 })
+module.exports = server

@@ -9,11 +9,11 @@ const recordRoutes = express.Router()
 const dbConnector = require('../db/mongoConnectionManager')
 
 // This section will help you get a list of all the records.
-recordRoutes.route('/record').get(function (req, res) {
-    let dbo = dbConnector.getDb('employees')
+recordRoutes.route('/record').get(async (req, res) => {
+    let dbo = await dbConnector.getDb('checkins')
     dbo.collection('checkins')
         .find({})
-        .toArray(function (err, result) {
+        .toArray((err, result) => {
             if (err) throw err
             res.json(result)
         })

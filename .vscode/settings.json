@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "checkins"
-    ]
+    ],
+    "jest.jestCommandLine": "NODE_OPTIONS=--experimental-vm-modules npx jest --no-cache --detectOpenHandles --runInBand --forceExit"
 }

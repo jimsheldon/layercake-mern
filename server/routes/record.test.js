@@ -1,40 +1,19 @@
-/**
- * It's a unit test, so mock the DB connection obj.
- */
-// jest.mock('../db/mongoConnectionManager')
+import request from 'supertest';
+import server from '../server';
 
-// const record = require('./record')
-const request = require('supertest')
+describe('Record Routes api Functional tests', () => {
+  it('a get to /record should return a list of records', async () => {
+    let results = await request(server).get('/record');
+    expect(results.statusCode).toBe(200);
+    expect(results.body).toBeInstanceOf(Array);
+  });
 
-describe('Record api tests', () => {
-    /**
-     * Hooks
-     */
-    afterEach(async () => {
-        await server.close()
-    })
-
-    beforeEach(() => {
-        // eslint-disable-next-line global-require
-        server = require('../server')
-        jest.setTimeout(30000)
-    })
-
-    /**
-     * Tests
-     */
-
-    it('a get to /record should return a list of records', async () => {
-        const result = await request(server).get('/record')
-
-        // expect(result.statusCode).toBe(200)
-    })
-
-    test('demo test', () => {
-        expect(true).toBe(true)
-    })
-
-    test('get all records', () => {
-        //response = record
-    })
-})
+  it('should create a new record', async () => {
+    let results = await request(server).post('/record/add');
+    expect(results.statusCode).toBe(200);
+    let checkins = await request(server).get('/record');
+    expect(checkins.statusCode).toBe(200);
+    expect(checkins.body).toBeInstanceOf(Array);
+    expect(checkins.body.length).toBe(1);
+  });
+});

@@ -1,36 +1,38 @@
-const express = require('express')
+import express from 'express';
+import mongoDbClient from '../db/db';
 
-// recordRoutes is an instance of the express router.
-// We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /record.
-const recordRoutes = express.Router()
+const record = express.Router();
 
-// This will help us connect to the database
-const dbConnector = require('../db/mongoConnectionManager')
+record.route('/record').get(async (req, res) => {
+  const dbConnection = await mongoDbClient.connectDb();
+  dbConnection
+    .db('checkins')
+    .collection('checkins')
+    .find({})
+    .toArray((err, result) => {
+      if (err) {
+        throw err;
+      }
+      res.json(result);
+    });
+});
 
-// This section will help you get a list of all the records.
-recordRoutes.route('/record').get(async (req, res) => {
-    let dbo = await dbConnector.getDb('checkins')
-    dbo.collection('checkins')
-        .find({})
-        .toArray((err, result) => {
-            if (err) throw err
-            res.json(result)
-        })
-})
+record.route('/record/add').post(async (req, res) => {
+  const dbConnection = await mongoDbClient.connectDb();
+  const ip = req.header('x-forwarded-for') || req.socket.remoteAddress;
+  const newObject = {
+    timestamp: Date(),
+    ip,
+  };
+  dbConnection
+    .db('checkins')
+    .collection('checkins')
+    .insertOne(newObject, (err, mongoResult) => {
+      if (err) {
+        throw err;
+      }
+      res.json(mongoResult);
+    });
+});
 
-// This section will help you create a new record.
-recordRoutes.route('/record/add').post((req, res) => {
-    const db_connect = dbConnector.getDb()
-    const ip = req.header('x-forwarded-for') || req.socket.remoteAddress
-    const newObject = {
-        timestamp: Date(),
-        ip: ip
-    }
-    db_connect.collection('checkins').insertOne(newObject, (err, mongoRes) => {
-        if (err) throw err
-        res.json(mongoRes)
-    })
-})
-
-module.exports = recordRoutes
+export default record;

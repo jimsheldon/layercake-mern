@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import buildEnv from '../buildEnv'
 const Record = (props) => (
     <tr>
         <td>{props.record.timestamp}</td>
@@ -13,7 +13,9 @@ export default function RecordList() {
     // This method fetches the records from the database.
     useEffect(() => {
         async function getRecords() {
-            const response = await fetch(`http://localhost:5001/record/`)
+            const response = await fetch(
+                `${buildEnv.getServerHostAndPort}/record/`
+            )
             console.debug(response)
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`

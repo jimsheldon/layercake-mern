@@ -1,4 +1,4 @@
-import record from './record';
+import record from './record.js';
 // import fs from 'fs'
 
 const customRoutes = () => {

@@ -1,5 +1,5 @@
 import express from 'express';
-import mongoDbClient from '../db/db';
+import mongoDbClient from '../db/db.js';
 
 const record = express.Router();
 

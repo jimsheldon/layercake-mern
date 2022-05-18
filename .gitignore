@@ -1,5 +1,6 @@
 config.env
 node_modules/
 server/coverage
+client/build
 client/coverage
 coverage/

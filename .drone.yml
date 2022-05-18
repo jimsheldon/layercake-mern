@@ -1,0 +1,47 @@
+kind: pipeline
+type: docker
+name: default
+
+trigger:
+  branch:
+  - main
+
+steps:
+  - name: test server
+    image: node:16-alpine
+    commands:
+    - cd server
+    - yarn install
+    - yarn test
+
+  - name: build server (dry run)
+    image: plugins/docker
+    settings:
+      dry_run: true
+      context: server
+      dockerfile: server/Dockerfile
+      username: jimsheldon
+      repo: jimsheldon/layercake-server
+      tags:
+      - latest
+      - ${DRONE_COMMIT_SHA:0:8}
+    when:
+      event:
+      - pull_request
+
+  - name: build client (dry run)
+    image: plugins/docker
+    settings:
+      dry_run: true
+      context: client
+      dockerfile: client/Dockerfile
+      build_args:
+        - SERVER_URI="http://example.com:5001"
+      username: jimsheldon
+      repo: jimsheldon/layercake-client
+      tags:
+      - latest
+      - ${DRONE_COMMIT_SHA:0:8}
+    when:
+      event:
+      - pull_request

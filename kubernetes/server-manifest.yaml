@@ -9,7 +9,7 @@ spec:
   type: LoadBalancer
   loadBalancerIP: "104.196.63.243"
   ports:
-  - port: 80
+  - port: 5001
     name: http
   selector:
     app: server

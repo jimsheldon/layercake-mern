@@ -24,8 +24,8 @@ steps:
       dry_run: true
       context: server
       dockerfile: server/Dockerfile
-      username: jimsheldon
-      repo: jimsheldon/layercake-server
+      username: octocat
+      repo: octocat/layercake-server
       tags:
       - latest
       - ${DRONE_COMMIT_SHA:0:8}
@@ -43,8 +43,8 @@ steps:
       dockerfile: client/Dockerfile
       build_args:
         - SERVER_URI="http://example.com:5001"
-      username: jimsheldon
-      repo: jimsheldon/layercake-client
+      username: octocat
+      repo: octocat/layercake-client
       tags:
       - latest
       - ${DRONE_COMMIT_SHA:0:8}
@@ -60,6 +60,8 @@ steps:
       context: server
       dockerfile: server/Dockerfile
       username: jimsheldon
+      password:
+        from_secret: docker_password
       repo: jimsheldon/layercake-server
       tags:
       - latest
@@ -79,6 +81,8 @@ steps:
       dockerfile: client/Dockerfile
       build_args_from_env: SERVER_URI
       username: jimsheldon
+      password:
+        from_secret: docker_password
       repo: jimsheldon/layercake-client
       tags:
       - latest

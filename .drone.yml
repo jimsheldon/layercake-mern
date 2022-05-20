@@ -8,7 +8,8 @@ trigger:
 
 steps:
   - name: test server
-    depends_on: clone
+    depends_on:
+    - clone
     image: node:16
     commands:
     - cd server
@@ -16,7 +17,8 @@ steps:
     - yarn test
 
   - name: build server (dry run)
-    depends_on: clone
+    depends_on:
+    - clone
     image: plugins/docker
     settings:
       dry_run: true
@@ -32,7 +34,8 @@ steps:
       - pull_request
 
   - name: build client (dry run)
-    depends_on: clone
+    depends_on:
+    - clone
     image: plugins/docker
     settings:
       dry_run: true
